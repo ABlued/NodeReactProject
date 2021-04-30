@@ -39,11 +39,16 @@ router.post('/',(req,res) => {
 router.post('/products',(req,res) => {
   // product collection에 들어 있는 모든 상품 정보 가져오기
 
+  let limit = req.body.limit ? parseInt(req.body.limit) : 20;
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+
   Product.find()
   .populate("writer")   // writer(데이터ID)에 대한 모든 정보를 가져온다
+  .skip(skip) //처음엔 8개만 가져와
+  .limit(limit)
   .exec((err, productInfo) =>{
     if(err) return res.status(400).json({ success: false, err})
-    return res.status(200).json({ success: true, productInfo})
+    return res.status(200).json({ success: true, productInfo, postSize: productInfo.length})
   })
 })
 module.exports = router;
