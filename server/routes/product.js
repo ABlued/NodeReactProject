@@ -35,6 +35,17 @@ router.post('/',(req,res) => {
     return res.status(200).json({ success: true})
   })
 })
+
+router.post('/products',(req,res) => {
+  // product collection에 들어 있는 모든 상품 정보 가져오기
+
+  Product.find()
+  .populate("writer")   // writer(데이터ID)에 대한 모든 정보를 가져온다
+  .exec((err, productInfo) =>{
+    if(err) return res.status(400).json({ success: false, err})
+    return res.status(200).json({ success: true, productInfo})
+  })
+})
 module.exports = router;
 // multer 이미지를 백엔드 서버에 저장해주는데 도와주는 모듈
 // 참고링크 : https://www.npmjs.com/package/multer
