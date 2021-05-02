@@ -45,11 +45,18 @@ router.post('/products',(req,res) => {
   let findArgs = {};
   for(let key in req.body.filters){
     if(req.body.filters[key].length > 0){
-      findArgs[key] = req.body.filters[key];
+      if(key === "price"){
+        findArgs[key] = {   // gte와 lte는 몽고DB에서 제공되는 API이다.
+          $gte: req.body.filters[key][0], // gte(greater then equal) : 이것보다 크거나 같고
+          $lte: req.body.filters[key][1]  // lte (less then equal) : 이것보다 작거나 같은
+        }
+      } else {
+        findArgs[key] = req.body.filters[key];
+      }
     }
+    console.log('findArgs',findArgs);
   }
 
-  console.log("findeargs1", findArgs);
   Product.find(findArgs)
   .populate("writer")   // writer(데이터ID)에 대한 모든 정보를 가져온다
   .skip(skip) //처음엔 8개만 가져와

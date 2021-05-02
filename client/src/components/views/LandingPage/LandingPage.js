@@ -5,7 +5,8 @@ import { Icon, Col, Card, Row, Carousel} from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import ImageSlider from '../../utils/ImageSlider'
 import CheckBox from '../LandingPage/Sections/CheckBox'
-import { continents } from './Sections/Datas'
+import RadioBox from './Sections/RadioBox'
+import { continents, price } from './Sections/Datas'
 
 function LandingPage() {
     const [Products, setProducts] = useState([])
@@ -82,14 +83,28 @@ function LandingPage() {
         getProducts(body)
         setSkip(0)
     }
+    const handlePrice = (value) => {
+        const data= price;
+        let array = [];
 
+        for(let key in data){
+            if(data[key]._id === parseInt(value, 10)){
+                array = data[key].array;
+            }
+        }
+        return array;
+    }
     const handleFilters = (filters, category) => {
         const newFilters = { ...Filters }
         newFilters[category] = filters
         // https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%A9%B0-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%85%B8%EB%93%9C-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%87%BC%ED%95%91%EB%AA%B0/lecture/41262?tab=curriculum&speed=1.25
         // 이 코드의 의미는 이 링크에 3:30 부터 보자
-
+        if(category === "price"){
+            let priceValues =  handlePrice(filters)
+            newFilters[category] = priceValues
+        }
         showFilteredResults(newFilters)
+        SetFilters(newFilters)
     }
 
 
@@ -100,10 +115,17 @@ function LandingPage() {
             </div>
 
             {/* Filter */}
-
-            {/* CheckBox */}
-            <CheckBox list={continents} handleFilters={filter => handleFilters(filter, "continents")}/>
-            {/* RadioBox */}
+            <Row gutter={[16, 16]}>
+                <Col lg={12} xs={24}>
+                    {/* CheckBox */}
+                    <CheckBox list={continents} handleFilters={filter => handleFilters(filter, "continents")}/>
+                </Col>
+                <Col lg={12} xs={24}>
+                    {/* RadioBox */}
+                    <RadioBox list={price} handleFilters={filter => handleFilters(filter, "price")}/>
+                </Col>
+            </Row>
+            
 
             {/* Search */}
 
