@@ -42,7 +42,15 @@ router.post('/products',(req,res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
 
-  Product.find()
+  let findArgs = {};
+  for(let key in req.body.filters){
+    if(req.body.filters[key].length > 0){
+      findArgs[key] = req.body.filters[key];
+    }
+  }
+
+  console.log("findeargs1", findArgs);
+  Product.find(findArgs)
   .populate("writer")   // writer(데이터ID)에 대한 모든 정보를 가져온다
   .skip(skip) //처음엔 8개만 가져와
   .limit(limit)

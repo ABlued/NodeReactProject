@@ -4,12 +4,18 @@ import axios from "axios"
 import { Icon, Col, Card, Row, Carousel} from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import ImageSlider from '../../utils/ImageSlider'
+import CheckBox from '../LandingPage/Sections/CheckBox'
+import { continents } from './Sections/Datas'
 
 function LandingPage() {
     const [Products, setProducts] = useState([])
     const [Skip, setSkip] = useState(0)
     const [Limit, setLimit] = useState(8)
     const [PostSize, setPostSize] = useState(0)
+    const [Filters, SetFilters] = useState({
+        continents : [],
+        price: []
+    })
 
     useEffect(() => {
 
@@ -24,7 +30,7 @@ function LandingPage() {
         axios.post('/api/product/products', body)
         .then(response => {
             if(response.data.success){
-                console.log(response.data);
+                // console.log(response.data);
                 if(body.loadMore){
                     setProducts([...Products, ...response.data.productInfo]);
                 } else {
@@ -66,6 +72,27 @@ function LandingPage() {
         </Col>
     })
 
+    const showFilteredResults = (filters) => {
+
+        let body = {
+            skip: 0,
+            limit: Limit,
+            filters: filters
+        }
+        getProducts(body)
+        setSkip(0)
+    }
+
+    const handleFilters = (filters, category) => {
+        const newFilters = { ...Filters }
+        newFilters[category] = filters
+        // https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%A9%B0-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%85%B8%EB%93%9C-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%87%BC%ED%95%91%EB%AA%B0/lecture/41262?tab=curriculum&speed=1.25
+        // 이 코드의 의미는 이 링크에 3:30 부터 보자
+
+        showFilteredResults(newFilters)
+    }
+
+
     return (
         <div style={{ width: '75%', margin: '3rem auto'}}>
             <div style={{ textAlign: 'center'}}>
@@ -73,6 +100,10 @@ function LandingPage() {
             </div>
 
             {/* Filter */}
+
+            {/* CheckBox */}
+            <CheckBox list={continents} handleFilters={filter => handleFilters(filter, "continents")}/>
+            {/* RadioBox */}
 
             {/* Search */}
 
