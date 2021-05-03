@@ -41,6 +41,7 @@ router.post('/products',(req,res) => {
 
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let term = req.body.searchTerm
 
   let findArgs = {};
   for(let key in req.body.filters){
@@ -57,14 +58,31 @@ router.post('/products',(req,res) => {
     console.log('findArgs',findArgs);
   }
 
-  Product.find(findArgs)
-  .populate("writer")   // writer(데이터ID)에 대한 모든 정보를 가져온다
-  .skip(skip) //처음엔 8개만 가져와
-  .limit(limit)
-  .exec((err, productInfo) =>{
-    if(err) return res.status(400).json({ success: false, err})
-    return res.status(200).json({ success: true, productInfo, postSize: productInfo.length})
-  })
+  if(term){
+    Product.find(findArgs)
+    .find({ $text: {$search: term}})
+    // $text에 궁금하다면 https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%A9%B0-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%85%B8%EB%93%9C-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%87%BC%ED%95%91%EB%AA%B0/lecture/41266?tab=curriculum&speed=1.25
+    // 7분부터 보세요
+    .populate("writer")   // writer(데이터ID)에 대한 모든 정보를 가져온다
+    .skip(skip) //처음엔 8개만 가져와
+    .limit(limit)
+    .exec((err, productInfo) =>{
+      if(err) return res.status(400).json({ success: false, err})
+      return res.status(200).json({ success: true, productInfo, postSize: productInfo.length})
+    })
+    
+  } else {
+    Product.find(findArgs)
+    .populate("writer")   // writer(데이터ID)에 대한 모든 정보를 가져온다
+    .skip(skip) //처음엔 8개만 가져와
+    .limit(limit)
+    .exec((err, productInfo) =>{
+      if(err) return res.status(400).json({ success: false, err})
+      return res.status(200).json({ success: true, productInfo, postSize: productInfo.length})
+    })
+
+  }
+
 })
 module.exports = router;
 // multer 이미지를 백엔드 서버에 저장해주는데 도와주는 모듈

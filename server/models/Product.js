@@ -35,7 +35,17 @@ const productSchema = mongoose.Schema({
         default: 0
     }
 }, { timestamps: true})
-
+productSchema.index({
+    title: 'text',
+    description: 'text'
+},{
+    weights:{
+        title: 5,
+        description: 1
+    }
+})
+// product을 검색할 때 어떤 항목을 더 중요시할게 볼 때 weigths를 사용한다.
+// 링크 참조 : https://docs.mongodb.com/manual/tutorial/control-results-of-text-search/
 const Product = mongoose.model('Product', productSchema);
 
 module.exports = { Product }
