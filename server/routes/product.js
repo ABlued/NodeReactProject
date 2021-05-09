@@ -80,9 +80,20 @@ router.post('/products',(req,res) => {
       if(err) return res.status(400).json({ success: false, err})
       return res.status(200).json({ success: true, productInfo, postSize: productInfo.length})
     })
-
   }
+})
 
+router.get('/products_by_id',(req,res) => {
+  let type = req.query.type
+  let productId = req.query.id
+
+  // ProductId를 이용해서 DB에서 productId와 같은 상품정보를 갖고온다
+  Product.find({ _id: productId })
+  .populate('writer')
+  .exec((err, product) => {
+    if(err) return res.status(400).send(err)
+    return res.status(200).send({ success: true, product})
+  })
 })
 module.exports = router;
 // multer 이미지를 백엔드 서버에 저장해주는데 도와주는 모듈
