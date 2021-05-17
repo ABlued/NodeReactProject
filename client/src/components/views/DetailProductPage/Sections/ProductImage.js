@@ -17,7 +17,7 @@ function ProductImage(props) {
             setImages(images)
         }
     },[props.detail])
-
+// useEffect의 마지막 인자는 props.detail이 바뀔때마다 랜더링이 되라는 것이다.
     return (
         <div>
             <ImageGallery items={Images}/>
