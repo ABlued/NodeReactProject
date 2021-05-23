@@ -25,7 +25,8 @@ router.post('/image',(req,res) => {
         return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename})
     })
 })
-
+// multer 이미지를 백엔드 서버에 저장해주는데 도와주는 모듈
+// 참고링크 : https://www.npmjs.com/package/multer
 router.post('/',(req,res) => {
   // 받아온 정보들을 DB에 넣어 준다.
   const product = new Product(req.body)
@@ -85,16 +86,22 @@ router.post('/products',(req,res) => {
 
 router.get('/products_by_id',(req,res) => {
   let type = req.query.type
-  let productId = req.query.id
+  let productIds = req.query.id  
+
+  if(type === "array"){
+    // id = 1234,2311,~, 를 ProductIds = ['1234','2311','~'] 로 바꿔주기
+    let ids = req.query.id.split(',')
+    productIds = ids.map(item => {
+      return item
+    })
+  }
 
   // ProductId를 이용해서 DB에서 productId와 같은 상품정보를 갖고온다
-  Product.find({ _id: productId })
+  Product.find({ _id: {$in: productIds} })
   .populate('writer')
   .exec((err, product) => {
     if(err) return res.status(400).send(err)
-    return res.status(200).send({ success: true, product})
+    return res.status(200).send(product)
   })
 })
 module.exports = router;
-// multer 이미지를 백엔드 서버에 저장해주는데 도와주는 모듈
-// 참고링크 : https://www.npmjs.com/package/multer
