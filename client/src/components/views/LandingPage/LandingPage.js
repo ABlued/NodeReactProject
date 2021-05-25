@@ -8,7 +8,7 @@ import CheckBox from '../LandingPage/Sections/CheckBox'
 import RadioBox from './Sections/RadioBox'
 import SearchFeature from './Sections/SearchFeature'
 import { continents, price } from './Sections/Datas'
-
+import './fontello-5d5b4f18/css/fontello-embedded.css'
 function LandingPage() {
     const [Products, setProducts] = useState([])
     const [Skip, setSkip] = useState(0)
@@ -64,12 +64,13 @@ function LandingPage() {
         return <Col lg={6} md={8} xs={24} key={index}>
             <Card
                 key={index}
-                cover={<a href={`/product/${product._id}`}><ImageSlider images={product.images}/></a>}
+                cover={<a href={`/product/${product._id}`}>
+                <ImageSlider images={product.images}/></a>}
             >
                
                 <Meta 
                     title={product.title}
-                    description={`$${product.price}`}
+                    description={`${product.price}원`}
                 />
             </Card>
         </Col>
@@ -126,7 +127,7 @@ function LandingPage() {
     return (
         <div style={{ width: '75%', margin: '3rem auto'}}>
             <div style={{ textAlign: 'center'}}>
-                <h2>씨님의 옥상에 오신 것을 환영합니다.<Icon type="rocket"/></h2>
+                <h2>옷은 NodeSinSa랑해<i class="icon-heart"></i></h2>
             </div>
 
             {/* Filter */}

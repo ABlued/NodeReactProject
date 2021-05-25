@@ -21,35 +21,39 @@ function RightMenu(props) {
 
   if (user.userData && !user.userData.isAuth) {
     return (
-      <Menu mode={props.mode}>
+      <Menu 
+      mode={props.mode}
+      theme={'dark'}>
         <Menu.Item key="mail">
-          <a href="/login">Signin</a>
+          <a href="/login"><p className="font__color">Signin</p></a>
         </Menu.Item>
         <Menu.Item key="app">
-          <a href="/register">Signup</a>
+          <a href="/register"><p className="font__color">Signup</p></a>
         </Menu.Item>
       </Menu>
     )
   } else {
     return (
-      <Menu mode={props.mode}>
+      <Menu 
+      mode={props.mode}
+      theme={'dark'}>
         <Menu.Item key="history">
-          <a href="/history">History</a>
+          <a href="/history"><p className="font__color">History</p></a>
         </Menu.Item>
         <Menu.Item key="upload">
-          <a href="/product/upload">upload</a>
+          <a href="/product/upload"><p className="font__color">upload</p></a>
         </Menu.Item>
 
         <Menu.Item key="cart" style={{paddingBottom: 3}}>
           <Badge count={user.userData && user.userData.cart.length}>
             <a href="/user/cart" className="head-example" style={{ marginRight: -22, color: '#667777'}}>
-              <Icon type="shopping-cart" style={{ fontSize: 30, marginBottom: 3}}/>
+              <Icon type="shopping-cart" style={{ fontSize: 30, marginBottom: 25, color: 'white'}}/>
             </a>
           </Badge>
         </Menu.Item>
 
         <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
+          <a onClick={logoutHandler}><p className="font__color">Logout</p></a>
         </Menu.Item>
       </Menu>
     )

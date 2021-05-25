@@ -1,15 +1,20 @@
 import React from 'react';
 import { Menu } from 'antd';
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+import '../Sections/Navbar.css'
+// const SubMenu = Menu.SubMenu;
+// const MenuItemGroup = Menu.ItemGroup;
 
 function LeftMenu(props) {
   return (
-    <Menu mode={props.mode}>
-    <Menu.Item key="mail">
-      <a href="/">Home</a>
+    <Menu 
+      mode={props.mode}
+      theme={'dark'}
+      >
+    <Menu.Item key="mail" transitionName="none"
+          maskTransitionName="none">
+      <a href="/"><p className="font__color">Home</p></a>
     </Menu.Item>
-    <SubMenu title={<span>Blogs</span>}>
+    {/* <SubMenu title={<span>Blogs</span>}>
       <MenuItemGroup title="Item 1">
         <Menu.Item key="setting:1">Option 1</Menu.Item>
         <Menu.Item key="setting:2">Option 2</Menu.Item>
@@ -18,7 +23,7 @@ function LeftMenu(props) {
         <Menu.Item key="setting:3">Option 3</Menu.Item>
         <Menu.Item key="setting:4">Option 4</Menu.Item>
       </MenuItemGroup>
-    </SubMenu>
+    </SubMenu> */}
   </Menu>
   )
 }

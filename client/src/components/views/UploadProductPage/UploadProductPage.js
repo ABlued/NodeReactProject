@@ -5,13 +5,13 @@ import axios from 'axios';
 const { TextArea } = Input;
 
 const Continents = [
-    {key:1, value: "Africa"},
-    {key:2, value: "Europe"},
-    {key:3, value: "Asia"},
-    {key:4, value: "North America"},
-    {key:5, value: "South America"},
-    {key:6, value: "Australia"},
-    {key:7, value: "Antarctica"}
+    {key:1, value: "상의"},
+    {key:2, value: "바지"},
+    {key:3, value: "아우터"},
+    {key:4, value: "신빌"},
+    {key:5, value: "가방"},
+    {key:6, value: "모자"},
+    {key:7, value: "액세서리"}
 ]
 
 function UploadProductPage(props) {
@@ -69,7 +69,7 @@ function UploadProductPage(props) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto'}}>
             <div style={{ textAlign: 'center', marginBottom: '2rem'}}>
-                <h2 level={2}>여행 상품 업로드</h2>
+                <h2 level={2}>상품 업로드</h2>
             </div>
         <Form onSubmit={submitHandler}>
             <FileUpload refreshFunction={updateImages}/>
@@ -83,7 +83,7 @@ function UploadProductPage(props) {
             <TextArea onChange={descriptionChangeHandler} value={Description}/>
             <br/>
             <br/>
-            <label>가격($)</label>
+            <label>가격(원)</label>
             <Input type="number" onChange={priceChangeHandler} value={Price}/>
             <br/>
             <br/>

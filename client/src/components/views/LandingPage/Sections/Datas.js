@@ -1,31 +1,31 @@
 const continents = [
     {
         "_id":1,
-        "name": "Africa"
+        "name": "상의"
     },
     {
         "_id":2,
-        "name": "Europe"
+        "name": "바지"
     },
     {
         "_id":3,
-        "name": "Asia"
+        "name": "아우터"
     },
     {
         "_id":4,
-        "name": "North America"
+        "name": "신빌"
     },
     {
         "_id":5,
-        "name": "South America"
+        "name": "가방"
     },
     {
         "_id":6,
-        "name": "Australia"
+        "name": "모자"
     },
     {
         "_id":7,
-        "name": "Antarctica"
+        "name": "액세서리"
     },
 ]
 
@@ -37,28 +37,28 @@ const price = [
     },
     {
         "_id": 1,
-        "name": "$0 to $199",
-        "array": [0, 199]
+        "name": "~10,000원",
+        "array": [0, 10000]
     },
     {
         "_id": 2,
-        "name": "$200 to $249",
-        "array": [200, 249]
+        "name": "10,000원 ~ 20,000원",
+        "array": [10000, 20000]
     },
     {
         "_id": 3,
-        "name": "$250 to $279",
-        "array": [250, 279]
+        "name": "20,000원 ~ 30,000원",
+        "array": [20000, 30000]
     },
     {
         "_id": 4,
-        "name": "$280 to $299",
-        "array": [280, 299]
+        "name": "30,000원 ~ 40,000원",
+        "array": [30000, 40000]
     },
     {
         "_id": 5,
-        "name": "more than $300",
-        "array": [300, 1500000]
+        "name": "50,000원 ~",
+        "array": [50000, 1000000]
     },
 ]
 export {

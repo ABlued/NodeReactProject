@@ -69,7 +69,7 @@ function CartPage(props) {
             </div>
             {ShowTotal ?
                 <div style={{ marginTop: '3rem' }}>
-                    <h2>Total Amount : ${Total}</h2>
+                    <h2>Total Amount : {Total}원</h2>
                 </div>
                 : ShowSuccess ?
                     <Result
