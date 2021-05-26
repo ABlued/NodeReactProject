@@ -18,7 +18,7 @@ function UploadProductPage(props) {
     const [Title, setTitle] = useState("")
     const [Description, setDescription] = useState("")
     const [Price, setPrice] = useState(0)
-    const [Continent, setContinent] = useState(1)
+    const [Continent, setContinent] = useState("상의")
     const [Images, setImages] = useState([])
 
 
@@ -89,7 +89,7 @@ function UploadProductPage(props) {
             <br/>
             <select onChange={continentChangeHandler} value={Continent}>
                 {Continents.map(item => (
-                    <option key={item.key} value={item.key}>{item.value}</option>
+                    <option key={item.key} value={item.value}>{item.value}</option>
                 ))}
             </select>
             <br/>

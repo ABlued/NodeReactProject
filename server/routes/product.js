@@ -56,7 +56,7 @@ router.post('/products',(req,res) => {
         findArgs[key] = req.body.filters[key];
       }
     }
-    console.log('findArgs',findArgs);
+    // console.log('findArgs',findArgs);
   }
 
   if(term){
