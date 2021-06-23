@@ -14,7 +14,7 @@ Node.js, React, MongoDB로 만든 의류 온라인쇼핑몰 NodeSinSa Store프�
 
 프로젝트 목적 : React에서 새롭게 배운 개념들을 활용하고 nodeJS와 MongoDB를 활용하여 반응형웹만들기  
 참여자 : ABlued  
-사용 스택 : React Hooks, Nodejs, MongoDB, Express, Redux 
+사용 스택 : React Hooks, Nodejs, MongoDB, Express, Redux  
 작업 환경 : VSCode  
   
 :wave: 홈페이지 소개
